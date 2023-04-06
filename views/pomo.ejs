@@ -13,9 +13,15 @@
     </section>
 
     <section class="logs">
-        <input type="date" value="">
+        <label for="date">Selected Day's Sessions:</label>
+        <input id="date" type="date" value="">
         <ul>
-            <!-- ejs loop for all sessions on selected day -->
+        <!-- ejs loop for all sessions on selected day -->
+        <% pomo.forEach(el => { %>
+            <li class="pomoLog" data-id="<%=el.id%>">
+                <span class="time"><%=el.time%></span>
+            </li>
+        <% }) %>
         </ul>
     </section>
 

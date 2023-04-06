@@ -4,7 +4,7 @@ module.exports = {
     getTodos: async (req,res)=>{
         console.log(req.user)
         try{
-            const todoItems = await Todo.find({userId:req.user.id})
+            const pomoLogs = await Todo.find({userId:req.user.id})
             const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
             res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user})
         }catch(err){
@@ -50,6 +50,14 @@ module.exports = {
             res.json('Deleted It')
         }catch(err){
             console.log(err)
+        }
+    },
+    getPomoByDate: async (req,res) => {
+        try {
+            const pomoList = await pomo.find({userId: req.user.id, date: req.params.date})
+            res.json(pomoList)
+        }  catch (error) {
+            res.status(400).json({error: error.message})
         }
     }
 }    
